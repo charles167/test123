@@ -1,22 +1,14 @@
 // app/layout.js
-import './globals.css'
-import '@fontsource/inter'; // ✅ basic font import
+'use client';
 
-
-
-
-
-export const metadata = {
-  title: 'Your App Title',
-  description: 'Your App Description',
-}
+import { SessionProvider } from 'next-auth/react';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body >
-        {children}
+      <body>
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
-  )
+  );
 }
