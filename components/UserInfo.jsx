@@ -1,10 +1,20 @@
 "use client";
 
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export default function UserInfo() {
-  const { data: session } = useSession();
+  const sessionResult = useSession();
+
+  // Early return if session is still loading or undefined
+  if (!sessionResult || !sessionResult.data) {
+    return (
+      <div className="grid place-items-center h-screen">
+        <p>Loading session...</p>
+      </div>
+    );
+  }
+
+  const { data: session } = sessionResult;
 
   return (
     <div className="grid place-items-center h-screen">
